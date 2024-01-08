@@ -10,7 +10,11 @@ public class PlayableCharacterModel : MonoBehaviour, IDamagable
 
     public virtual void Movement()
     {
-        // Implement movement logic for the character
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        Vector2 movement = new Vector2(horizontalInput, verticalInput) * speed * Time.deltaTime;
+        transform.Translate(movement, Space.Self);
     }
 
     public virtual void ApplyDamage(IDamagable damagable)
