@@ -7,20 +7,29 @@ using UnityEngine.TextCore.Text;
 public class PlayableCharacterController : MonoBehaviour
 {
     [SerializeField] private PlayableCharacterModel[] characters = new PlayableCharacterModel[3];
-    [SerializeField] private int currentCharacterIndex;
+    private int currentCharacterIndex;
 
     private void Start()
     {
         // Initialize characters array with instantiated character objects
-        currentCharacterIndex = 0; // Set the initial character (Regular Alice, 1= Big, 2 = Small)
-        characters[0] = GetComponent<RegularAlice>();
-        characters[1] = GetComponent<BigAlice>();
-        characters[2] = GetComponent<LittleAlice>();
+        currentCharacterIndex = 0; // Set the initial character 0 = Regular Alice, 1 = Big, 2 = Small)
+        characters[0] = gameObject.AddComponent<RegularAlice>();
+        characters[1] = gameObject.AddComponent<BigAlice>();
+        characters[2] = gameObject.AddComponent<LittleAlice>();
+
+        Debug.Log("length =" + characters.Length);
+        Debug.Log("CurrentIndex: " + currentCharacterIndex);
+        SetActiveCharacter(currentCharacterIndex);
     }
 
     private void Update()
     {
-        characters[currentCharacterIndex].Movement();
+        MoveCurrentCharacter();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            UseSpecialAbility();
+        }
 
         // Switch a character when tab is pressed 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -32,15 +41,16 @@ public class PlayableCharacterController : MonoBehaviour
     public void SwitchCharacter()
     {
         currentCharacterIndex = (currentCharacterIndex + 1) % characters.Length;
+        Debug.Log("CurrentIdx: " + currentCharacterIndex);
         SetActiveCharacter(currentCharacterIndex);
     }
 
-    private void SetActiveCharacter(int index)
+    public void SetActiveCharacter(int index)
     {
-        // Disable all characters except the one at the given index
         for (int i = 0; i < characters.Length; i++)
         {
             characters[i].gameObject.SetActive(i == index);
+            Debug.Log(i + " active? "+characters[i].gameObject.activeInHierarchy);
         }
     }
 

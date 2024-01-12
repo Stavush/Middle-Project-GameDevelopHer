@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayableCharacterModel : MonoBehaviour, IDamagable
+public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
 {
     public int speed;
     public int maxHp;
@@ -17,15 +17,10 @@ public class PlayableCharacterModel : MonoBehaviour, IDamagable
         transform.Translate(movement, Space.Self);
     }
 
-    public virtual void ApplyDamage(IDamagable damagable)
-    {
-        // Implement how the character applies damage
-    }
+    // abstract changes to virtual if we want all characters to act the same
+    public abstract void ApplyDamage(IDamagable damagable); 
 
-    public virtual void SpecialAbility()
-    {
-        // Implement special ability for the character
-    }
+    public abstract void SpecialAbility();
 
     // Inheritance from IDamagable and implementation of it
     public void TakeDamage(int howMuch)
@@ -39,63 +34,6 @@ public class PlayableCharacterModel : MonoBehaviour, IDamagable
 
     public void Die()
     {
-        // Implement player character death logic
-    }
-}
-
-public class RegularAlice : PlayableCharacterModel
-{
-    public override void ApplyDamage(IDamagable damagable)
-    {
-        Debug.Log("Apply damage for regular Alice");
-    }
-
-    public override void SpecialAbility()
-    {
-        Debug.Log("Apply damage for regular Alice");
-
-    }
-
-    public override void Movement()
-    {
-        //
-    }
-}
-
-public class BigAlice : PlayableCharacterModel
-{
-    public override void ApplyDamage(IDamagable damagable)
-    {
-        Debug.Log("Apply damage for big Alice");
-    }
-
-    public override void SpecialAbility()
-    {
-        Debug.Log("Apply damage for big Alice");
-
-    }
-
-    public override void Movement()
-    {
-        //
-    }
-}
-
-public class LittleAlice : PlayableCharacterModel
-{
-    public override void ApplyDamage(IDamagable damagable)
-    {
-        Debug.Log("Apply damage for little Alice");
-    }
-
-    public override void SpecialAbility()
-    {
-        Debug.Log("Apply damage for little Alice");
-
-    }
-
-    public override void Movement()
-    {
-        //
+        Debug.Log("Alice died :(");
     }
 }
