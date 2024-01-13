@@ -6,26 +6,22 @@ using UnityEngine.TextCore.Text;
 
 public class PlayableCharacterController : MonoBehaviour
 {
+    private CharacterSwitch switchPlayer;
+
     [SerializeField] private PlayableCharacterModel[] characters = new PlayableCharacterModel[3];
     private int currentCharacterIndex;
 
     private void Start()
     {
-        // Initialize characters array with instantiated character objects
-        currentCharacterIndex = 0; // Set the initial character 0 = Regular Alice, 1 = Big, 2 = Small)
-        characters[0] = gameObject.AddComponent<RegularAlice>();
-        characters[1] = gameObject.AddComponent<BigAlice>();
-        characters[2] = gameObject.AddComponent<LittleAlice>();
+        switchPlayer = GetComponent<CharacterSwitch>();
 
-        Debug.Log("length =" + characters.Length);
-        Debug.Log("CurrentIndex: " + currentCharacterIndex);
-        SetActiveCharacter(currentCharacterIndex);
     }
 
     private void Update()
     {
         MoveCurrentCharacter();
 
+        // Operate character's special ability when space is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
             UseSpecialAbility();
@@ -34,24 +30,21 @@ public class PlayableCharacterController : MonoBehaviour
         // Switch a character when tab is pressed 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            SwitchCharacter();
+            SwitchCharacter();  
         }
     }
 
     public void SwitchCharacter()
     {
+        Debug.Log("Enter to SwitchCharacter()");
         currentCharacterIndex = (currentCharacterIndex + 1) % characters.Length;
-        Debug.Log("CurrentIdx: " + currentCharacterIndex);
         SetActiveCharacter(currentCharacterIndex);
     }
 
     public void SetActiveCharacter(int index)
     {
-        for (int i = 0; i < characters.Length; i++)
-        {
-            characters[i].gameObject.SetActive(i == index);
-            Debug.Log(i + " active? "+characters[i].gameObject.activeInHierarchy);
-        }
+        Debug.Log("Enter to SetActiveCharacter()");
+        switchPlayer.SwitchCharacter(currentCharacterIndex);
     }
 
     public void ApplyCharacterDamage(IDamagable damagable)

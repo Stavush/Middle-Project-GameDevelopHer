@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class LittleAlice : PlayableCharacterModel
 {
+    /*public override int speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }*/
+
     public override void ApplyDamage(IDamagable damagable)
     {
         Debug.Log("Apply damage for little Alice");

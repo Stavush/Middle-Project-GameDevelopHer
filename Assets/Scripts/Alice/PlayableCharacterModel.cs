@@ -4,8 +4,9 @@ using UnityEngine;
 
 public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
 {
-    public int speed;
-    public int maxHp;
+    //public abstract int speed { get; set; }
+    public int speed = 5;
+    public int maxHp = 100;
     protected int currentHp;
 
     public virtual void Movement()
@@ -17,7 +18,7 @@ public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
         transform.Translate(movement, Space.Self);
     }
 
-    // abstract changes to virtual if we want all characters to act the same
+    // change abstract to virtual if we want all characters to act the same
     public abstract void ApplyDamage(IDamagable damagable); 
 
     public abstract void SpecialAbility();
