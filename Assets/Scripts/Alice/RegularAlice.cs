@@ -5,7 +5,11 @@ using UnityEngine;
 public class RegularAlice : PlayableCharacterModel
 {
     Rigidbody2D rb;
+
+    [SerializeField] private AudioSource jumpSoundEffect;
+
     private int jumpPower = 8;
+
 
     public override void ApplyDamage(IDamagable damagable)
     {
@@ -16,6 +20,7 @@ public class RegularAlice : PlayableCharacterModel
     {
         // Special ability is jumping between spikes
         rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+        jumpSoundEffect.Play();
     }
 
     public void Start()
