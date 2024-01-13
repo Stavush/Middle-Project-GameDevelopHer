@@ -13,7 +13,6 @@ public class BigAlice : PlayableCharacterModel
     public override void SpecialAbility()
     {
         Debug.Log("Shoot particles at soldiers");
-
     }
 
 }
