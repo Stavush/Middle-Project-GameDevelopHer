@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class RegularAlice : PlayableCharacterModel
 {
-    /*public override int speed
-    {
-        get { return speed; }
-        set { speed = 5; }
-    }*/
+    Rigidbody2D rb;
+    private int jumpPower = 8;
 
     public override void ApplyDamage(IDamagable damagable)
     {
@@ -17,7 +14,12 @@ public class RegularAlice : PlayableCharacterModel
 
     public override void SpecialAbility()
     {
-        Debug.Log("Jump between spikes");
+        // Special ability is jumping between spikes
+        rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+    }
 
+    public void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
     }
 }

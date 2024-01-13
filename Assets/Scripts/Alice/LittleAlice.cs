@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class LittleAlice : PlayableCharacterModel
 {
-    /*public override int speed
-    {
-        get { return speed; }
-        set { speed = value; }
-    }*/
+    private bool isCrawling;
 
     public override void ApplyDamage(IDamagable damagable)
     {
@@ -17,8 +13,18 @@ public class LittleAlice : PlayableCharacterModel
 
     public override void SpecialAbility()
     {
-        Debug.Log("Apply damage for little Alice");
-
+        // Special ability is crawling - only change animation and movement speed
+        if (!isCrawling)
+        {
+            Debug.Log("She is not crawling");
+            isCrawling = true;
+        }
+        else
+        {
+            Debug.Log("She is crawling");
+            isCrawling = false;
+        }
     }
+
 
 }

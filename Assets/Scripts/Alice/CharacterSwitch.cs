@@ -30,14 +30,11 @@ public class CharacterSwitch : MonoBehaviour
 
     public void SwitchCharacter(int index)
     {
-        Debug.Log("Enter to SwitchCharacter() in CharacterSwitch");
-
         for (int i = 0; i < characters.Length; i++)
         {
             if (characters[i] != null)
             {
                 characters[i].gameObject.SetActive(i == index);
-                Debug.Log(i + " active? " + characters[i].gameObject.activeInHierarchy);
             }
             else
             { 

@@ -1,13 +1,14 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
 {
-    //public abstract int speed { get; set; }
-    public int speed = 5;
-    public int maxHp = 100;
-    protected int currentHp;
+
+    public int speed;
+    public int maxHp = 3;
+    public int currentHp;
 
     public virtual void Movement()
     {
@@ -35,6 +36,6 @@ public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
 
     public void Die()
     {
-        Debug.Log("Alice died :(");
+        Debug.Log("Alice died :( ");
     }
 }
