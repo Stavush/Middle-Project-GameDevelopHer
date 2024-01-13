@@ -1,23 +1,55 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class MazeModel : MonoBehaviour
+public class MazeController : MonoBehaviour
 {
-    [SerializeField]
-    public int mazeWidth = 10; // only for example
-    public int mazeHeight = 10;
+    public Tilemap mazeTilemap;
+    public TileBase wallTile;
+    public TileBase passageTile;
+    public TileBase exitTile;
 
-    public int startPositionX;
-    public int startPositionY;
-
-    public int exitPositionX;
-    public int exitPositionY;
+    public MazeModel mazeModel;
+    public Transform player;
 
     private Vector3Int exitPosition;
 
-    public Vector3Int ExitPosition => exitPosition;
-
     void Start()
     {
-        exitPosition = new Vector3Int(exitPositionX, exitPositionY, 0);
+        GenerateMaze();
+        PlacePlayerAtStartPosition();
+        PlaceExit();
+    }
+
+    void GenerateMaze()
+    {
+        // Initialize the maze with walls
+        for (int x = 0; x < mazeModel.mazeWidth; x++)
+        {
+            for (int y = 0; y < mazeModel.mazeHeight; y++)
+            {
+                mazeTilemap.SetTile(new Vector3Int(x, y, 0), wallTile);
+            }
+        }
+
+        // You can replace the maze generation logic here if needed
+    }
+
+    void PlacePlayerAtStartPosition()
+    {
+        player.position = new Vector3(mazeModel.startPositionX, mazeModel.startPositionY);
+    }
+
+    void PlaceExit()
+    {
+        mazeTilemap.SetTile(mazeModel.ExitPosition, exitTile);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if the player reached the exit
+        if (other.transform == player)
+        {
+            Debug.Log("Player reached the exit!");
+        }
     }
 }

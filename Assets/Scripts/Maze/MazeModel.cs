@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MapModel : MonoBehaviour
+public class MazeModel : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    public int mazeWidth = 10; // only for example
+    public int mazeHeight = 10;
+
+    public int startPositionX;
+    public int startPositionY;
+
+    public int exitPositionX;
+    public int exitPositionY;
+
+    private Vector3Int exitPosition;
+
+    public Vector3Int ExitPosition => exitPosition;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        exitPosition = new Vector3Int(exitPositionX, exitPositionY, 0);
     }
 }
