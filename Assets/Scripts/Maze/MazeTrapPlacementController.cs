@@ -1,25 +1,60 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class TrapMazePlacementModel : MonoBehaviour
+public class MazeTrapPlacementController : MonoBehaviour
 {
-    // Reference to the trap tilemap
-    public Tilemap trapTilemap;
+    // Singleton instance
+    public static MazeTrapPlacementController Instance;
 
-    // Array of trap prefabs
-    public GameObject[] trapPrefabs;
+    public MazeTrapPlacementModel mazetrapPlacementModel;
 
-    // Enemy prefab for the Queen
-    public GameObject queenEnemyPrefab;
-
-    public int numberOfTraps = 3;
-
-    public Vector3Int GetRandomTrapPosition()
+    void Awake()
     {
-        // You can implement logic to get a random position within the trapTilemap bounds
-        int randomX = Random.Range(trapTilemap.cellBounds.x, trapTilemap.cellBounds.x + trapTilemap.cellBounds.size.x);
-        int randomY = Random.Range(trapTilemap.cellBounds.y, trapTilemap.cellBounds.y + trapTilemap.cellBounds.size.y);
+        // Singleton to ensure there is only one instance
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
-        return new Vector3Int(randomX, randomY, 0);
+    void Start()
+    {
+        // Place traps and the Queen enemy when the game starts
+        PlaceTraps();
+        PlaceQueenEnemy();
+    }
+
+    void PlaceTraps()
+    {
+        for (int i = 0; i < mazetrapPlacementModel.numberOfTraps; i++)
+        {
+            Vector3Int trapPosition = mazetrapPlacementModel.GetRandomTrapPosition();
+            PlaceTrapAtPosition(trapPosition);
+        }
+    }
+
+    void PlaceTrapAtPosition(Vector3Int position)
+    {
+        GameObject selectedTrapPrefab = mazetrapPlacementModel.GetRandomTrapPrefab();
+        if (selectedTrapPrefab != null)
+        {
+            // Instantiate the trap prefab at the specified position
+            Instantiate(selectedTrapPrefab, mazetrapPlacementModel.trapTilemap.GetCellCenterWorld(position), Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Failed to get a random trap prefab!");
+        }
+    }
+
+        void PlaceQueenEnemy()
+    {
+        // Place the Queen enemy at the exit point
+        Vector3Int exitPosition = mazetrapPlacementModel.GetRandomTrapPosition(); // Example, adjust as needed
+        Instantiate(mazetrapPlacementModel.queenEnemyPrefab, mazetrapPlacementModel.trapTilemap.GetCellCenterWorld(exitPosition), Quaternion.identity);
     }
 }
