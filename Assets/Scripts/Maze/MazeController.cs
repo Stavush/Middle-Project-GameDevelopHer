@@ -12,12 +12,16 @@ public class MazeController : MonoBehaviour
     public Transform player;
 
     private Vector3Int exitPosition;
+    private float startTime;
 
     void Start()
     {
         GenerateMaze();
         PlacePlayerAtStartPosition();
         PlaceExit();
+
+        // Record the start time when the game begins
+        startTime = Time.time;
     }
 
     void GenerateMaze()
@@ -41,15 +45,44 @@ public class MazeController : MonoBehaviour
 
     void PlaceExit()
     {
-        mazeTilemap.SetTile(mazeModel.ExitPosition, exitTile);
+        exitPosition = mazeModel.ExitPosition;
+        mazeTilemap.SetTile(exitPosition, exitTile);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void Update()
     {
-        // Check if the player reached the exit
-        if (other.transform == player)
+        // Check for winning conditions
+        CheckWinningCondition();
+
+        // Check for losing conditions
+        CheckLosingCondition();
+    }
+
+    void CheckWinningCondition()
+    {
+        // Check if the player is close to the exit point
+        float distanceToExit = Vector3.Distance(player.position, mazeTilemap.GetCellCenterWorld(exitPosition));
+
+        // You can adjust the threshold distance as needed
+        float winningDistanceThreshold = 1.0f;
+
+        if (distanceToExit < winningDistanceThreshold)
         {
-            Debug.Log("Player reached the exit!");
+            Debug.Log("Player reached the exit! You win!");
+ 
+        }
+    }
+
+    void CheckLosingCondition()
+    {
+        // Check if the player has played for 2 minutes without reaching the exit
+        float elapsedTime = Time.time - startTime;
+        float losingTimeThreshold = 120.0f; // 2 minutes in seconds
+
+        if (elapsedTime > losingTimeThreshold)
+        {
+            Debug.Log("You took too long! You lose.");
+          
         }
     }
 }
