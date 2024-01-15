@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class MazeController : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class MazeController : MonoBehaviour
 
     private Vector3Int exitPosition;
     private float startTime;
+    private float countdownDuration = 120.0f; // 2 minutes in seconds
+
+    public Text countdownText;
+    public GameObject losePopup;
+    public GameObject winPopup;
 
     void Start()
     {
@@ -22,6 +28,9 @@ public class MazeController : MonoBehaviour
 
         // Record the start time when the game begins
         startTime = Time.time;
+
+        // Initialize UI elements
+        UpdateCountdownUI();
     }
 
     void GenerateMaze()
@@ -69,20 +78,39 @@ public class MazeController : MonoBehaviour
         if (distanceToExit < winningDistanceThreshold)
         {
             Debug.Log("Player reached the exit! You win!");
- 
-        }
+            winPopup.SetActive(true);
+
+        }           
     }
 
     void CheckLosingCondition()
     {
-        // Check if the player has played for 2 minutes without reaching the exit
-        float elapsedTime = Time.time - startTime;
-        float losingTimeThreshold = 120.0f; // 2 minutes in seconds
 
-        if (elapsedTime > losingTimeThreshold)
+        float elapsedTime = Time.time - startTime;
+        float remainingTime = Mathf.Max(countdownDuration - elapsedTime, 0.0f);
+
+    
+        UpdateCountdownUI();
+
+        // Check if the countdown has reached 00:00
+        if (remainingTime <= 0.0f)
         {
-            Debug.Log("You took too long! You lose.");
-          
+            Debug.Log("Time's up! You lose.");
+         
+
+            // Show the lose popup
+            losePopup.SetActive(true);
         }
+    }
+
+    void UpdateCountdownUI()
+    {
+        // Format the remaining time as minutes:seconds
+        int minutes = Mathf.FloorToInt(countdownDuration / 60.0f);
+        int seconds = Mathf.FloorToInt(countdownDuration % 60.0f);
+        string countdownString = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+
+        countdownText.text = countdownString;
     }
 }
