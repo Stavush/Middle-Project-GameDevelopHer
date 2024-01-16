@@ -6,16 +6,8 @@ using UnityEngine.UI;
 public class MazeController : MonoBehaviour
 {
 
-    //   public TileBase exitTile;
 
-    public MazeModel mazeModel;
-    public Transform player;
-    public Tilemap mazeTilemap;
-    public TileBase wallTile;
-    public TileBase passageTile;
-    public TileBase exitTile;
-
-    private Vector3Int exitPosition;
+  
     private float startTime;
     private float countdownDuration = 120.0f; // 2 minutes in seconds
     float remainingTime;
@@ -28,54 +20,33 @@ public class MazeController : MonoBehaviour
     void Start()
     {
 
-        PlacePlayerAtStartPosition();
-        PlaceExit();
-
-
         startTime = Time.time;
         losePopup.SetActive(false);
         winPopup.SetActive(false);
 
-
     }
 
 
 
-    void PlacePlayerAtStartPosition()
-    {
-        player.position = new Vector3(mazeModel.startPositionX, mazeModel.startPositionY);
-    }
-
-    void PlaceExit()
-    {
-        exitPosition = mazeModel.ExitPosition;
-        mazeTilemap.SetTile(exitPosition, exitTile);
-    }
 
     void Update()
     {
 
 
-        CheckWinningCondition();
+      
 
 
 
         CheckLosingCondition();
     }
 
-    void CheckWinningCondition()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the player is close to the exit point
-        float distanceToExit = Vector3.Distance(player.position, mazeTilemap.GetCellCenterWorld(exitPosition));
-
-
-        float winningDistanceThreshold = 1.0f;
-
-        if (distanceToExit < winningDistanceThreshold)
+        // Check if the entering collider belongs to Alice
+        if (other.CompareTag("Player"))
         {
-
+            // Alice entered the finish line, trigger winning condition
             winPopup.SetActive(true);
-
         }
     }
 
@@ -84,7 +55,6 @@ public class MazeController : MonoBehaviour
 
         float elapsedTime = Time.time - startTime;
         remainingTime = Mathf.Max(countdownDuration - elapsedTime, 0.0f);
-
 
 
         UpdateCountdownUI();
