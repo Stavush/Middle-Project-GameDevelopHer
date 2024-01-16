@@ -14,6 +14,12 @@ public class BaseTrap : MonoBehaviour, IDamagable
         Debug.Log($"{gameObject.name} took {howMuch} damage.");
     }
 
+    public virtual void DealDamage(int Damage)
+    {
+        Debug.Log($"{gameObject.name} did {Damage} damage.");
+    }
+
+
     public  virtual void Die()
     {
         Debug.Log($"{gameObject.name} died");

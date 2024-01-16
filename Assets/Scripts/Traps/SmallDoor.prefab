@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6839867004407921168}
   - component: {fileID: 6478926995231468324}
   - component: {fileID: 4760797496181130481}
+  - component: {fileID: -5555204044403993739}
+  - component: {fileID: -1512693039694235147}
   m_Layer: 0
   m_Name: SmallDoor
   m_TagString: Untagged
@@ -121,3 +123,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-5555204044403993739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6719192386775854871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fc90eccf2999e40975dd2d6c549d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
+--- !u!114 &-1512693039694235147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6719192386775854871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fc90eccf2999e40975dd2d6c549d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
