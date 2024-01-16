@@ -1,11 +1,14 @@
 using UnityEngine;
 
 public class SmallDoorTrap : BaseTrap
+
 {
-    public override void TriggerTrap(GameObject player)
+    [SerializeField]
+    public GameObject Player;
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Additional logic specific to SmallDoorTrap
-        if (player.CompareTag("SmallAlice"))
+        
+        if (collision.gameObject.CompareTag("SmallAlice")&& Input.GetKey(KeyCode.Space))
         {
             // Only small Alice can go through the door
             Debug.Log("Small Alice passed through the door!");
@@ -18,7 +21,6 @@ public class SmallDoorTrap : BaseTrap
         }
         else
         {
-            
             TakeDamage(damageAmount);
         }
     }

@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class CardSoldierTrap : BaseTrap
 {
-    public override void TriggerTrap(GameObject player)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Additional logic specific to CardSoldierTrap
-        if (player.CompareTag("MediumAlice"))
+
+        if (collision.gameObject.CompareTag("Player"))
         {
+            DealDamage(damageAmount);
+        }
+        if (collision.gameObject.CompareTag("Heart"))
+        {
+           TakeDamage(damageAmount);
+        
             // Medium Alice can blow away the card soldier with a kiss
             Debug.Log("Medium Alice blew away the card soldier with a kiss!");
         }
-        else
-        {
-            // Deal damage to the wrong character
-            DealDamage(damageAmount);
-        }
+     
     }
 }

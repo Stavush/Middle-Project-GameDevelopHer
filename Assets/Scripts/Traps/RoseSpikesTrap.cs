@@ -1,19 +1,25 @@
+using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RoseSpikesTrap : BaseTrap
 {
-    public override void TriggerTrap(GameObject player)
+    [SerializeField]
+    public GameObject Player;
+    IDamagable d;
+    public void OnTriggerEnter2D(Collider2D c)
     {
-        // Additional logic specific to RoseSpikesTrap
-        if (player.CompareTag("BigAlice"))
+        if (c.gameObject.CompareTag("BigAlice") && Input.GetKeyDown(KeyCode.Space))
         {
             // Only big Alice can walk on rose spikes
             Debug.Log("Big Alice walked on the rose spikes!");
         }
         else
         {
-            // Deal damage to the wrong character
+            Player.GetComponent<PlayableCharacterController>().ApplyCharacterDamage(d);
+
             TakeDamage(damageAmount);
         }
     }
+
 }

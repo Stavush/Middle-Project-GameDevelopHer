@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BaseTrap : MonoBehaviour, IDamagable
 {
+  
     public int damageAmount = 10;
 
     public virtual void TriggerTrap(GameObject player)
@@ -16,6 +17,7 @@ public class BaseTrap : MonoBehaviour, IDamagable
 
     public virtual void DealDamage(int Damage)
     {
+
         Debug.Log($"{gameObject.name} did {Damage} damage.");
     }
 
