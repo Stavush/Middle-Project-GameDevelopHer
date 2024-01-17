@@ -10,13 +10,31 @@ public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
     public int maxHp = 3;
     public int currentHp;
 
+    private bool isTurningRight = true;
+
+    
     public virtual void Movement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
 
-        Vector2 movement = new Vector2(horizontalInput, verticalInput) * speed * Time.deltaTime;
+        Vector2 movement = new Vector2(horizontalInput, 0f) * speed * Time.deltaTime;
         transform.Translate(movement, Space.Self);
+
+        if (horizontalInput > 0f && !isTurningRight)
+        {
+            FlipDirection();
+        }
+        else if(horizontalInput < 0f && isTurningRight)
+        {
+            FlipDirection();
+        }
+
+    }
+
+    public void FlipDirection()
+    {
+        transform.Rotate(0f, 180f, 0f);
+        isTurningRight = !isTurningRight;
     }
 
     // change abstract to virtual if we want all characters to act the same
@@ -38,4 +56,6 @@ public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
     {
         Debug.Log("Alice died :( ");
     }
+
+    
 }
