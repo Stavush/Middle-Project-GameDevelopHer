@@ -8,21 +8,31 @@ public class Shooting : MonoBehaviour
 
     public ParticleSystem particleSystem;
 
-    List<ParticleCollisionEvent> colEvents = new List<ParticleCollisionEvent>();
+    List<ParticleCollisionEvent> collisionEvents;
 
-    private void Update()
+    private string EnemyTag;
+
+    private void Start()
     {
-
+        particleSystem = GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
     }
 
     private void OnParticleCollision(GameObject other)
     {
-        int events = particleSystem.GetCollisionEvents(other, colEvents);
-        
-        for(int i = 0; i < events; i++)
-        {
+        ParticlePhysicsExtensions.GetCollisionEvents(particleSystem, other, collisionEvents);
 
+        for(int i = 0; i < collisionEvents.Count; i++)
+        {
+            let collider = collisionEvents[i].colliderComponent;
+
+            if (collider.CompareTag(EnemyTag))
+            {
+                let enemy = collider.GetComponent<Soldier>();
+                enemy.gameObject.SetActive(false);
+            }
         }
+
     }
 }
 
