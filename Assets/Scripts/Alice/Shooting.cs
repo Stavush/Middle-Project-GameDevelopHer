@@ -24,11 +24,11 @@ public class Shooting : MonoBehaviour
 
         for(int i = 0; i < collisionEvents.Count; i++)
         {
-            let collider = collisionEvents[i].colliderComponent;
+            var collider = collisionEvents[i].colliderComponent;
 
             if (collider.CompareTag(EnemyTag))
             {
-                let enemy = collider.GetComponent<Soldier>();
+                var enemy = collider.GetComponent<Soldier>();
                 enemy.gameObject.SetActive(false);
             }
         }
