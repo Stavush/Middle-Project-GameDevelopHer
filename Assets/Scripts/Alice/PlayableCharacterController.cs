@@ -91,8 +91,9 @@ public class PlayableCharacterController : MonoBehaviour
             {
                 characters[i].gameObject.GetComponent<BoxCollider2D>().enabled = true;
             }
-            characters[currentCharacterIndex].GetComponentInParent<Transform>().position = characters[currentCharacterIndex].gameObject.transform.position;
+            characters[i].transform.position = transform.position;
         }
+
     }
 
 }
