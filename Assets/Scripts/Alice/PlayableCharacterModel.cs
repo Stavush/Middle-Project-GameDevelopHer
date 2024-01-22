@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
+public class PlayableCharacterModel : MonoBehaviour, IDamagable
 {
 
     public int speed;
@@ -20,9 +20,15 @@ public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
     }
 
     // change abstract to virtual if we want all characters to act the same
-    public abstract void ApplyDamage(IDamagable damagable); 
+    public virtual void ApplyDamage(IDamagable damagable)
+    {
 
-    public abstract void SpecialAbility();
+    }
+
+    public virtual void SpecialAbility()
+    {
+
+    }
 
     // Inheritance from IDamagable and implementation of it
     public void TakeDamage(int howMuch)
@@ -38,4 +44,5 @@ public abstract class PlayableCharacterModel : MonoBehaviour, IDamagable
     {
         Debug.Log("Alice died :( ");
     }
+
 }

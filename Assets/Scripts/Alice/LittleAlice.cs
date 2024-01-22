@@ -6,7 +6,7 @@ public class LittleAlice : PlayableCharacterModel
 {
     private bool isCrawling;
 
-    public override void ApplyDamage(IDamagable damagable)
+    public void ApplyDamage(IDamagable damagable)
     {
         Debug.Log("Apply damage for little Alice");
     }

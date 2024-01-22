@@ -5,7 +5,7 @@ using UnityEngine;
 public class BigAlice : PlayableCharacterModel
 {
 
-    public override void ApplyDamage(IDamagable damagable)
+    public void ApplyDamage(IDamagable damagable)
     {
         Debug.Log("Apply damage for big Alice");
     }

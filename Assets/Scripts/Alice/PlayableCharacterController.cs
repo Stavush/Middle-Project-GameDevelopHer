@@ -14,8 +14,10 @@ public class PlayableCharacterController : MonoBehaviour
     private int currentCharacterIndex;
 
 
+
     private void Start()
     {
+
         switchPlayer = GetComponent<CharacterSwitch>();
 
         foreach (var character in characters)
@@ -63,14 +65,35 @@ public class PlayableCharacterController : MonoBehaviour
         characters[currentCharacterIndex].ApplyDamage(damagable);
     }
 
-    public void MoveCurrentCharacter()
+    public void MoveCurrentCharacter() //Sarin changed it
     {
-        characters[currentCharacterIndex].Movement();
+        CencelBoxColiderForMovementToNotBeDisturbed(); // sarin added a function
+        gameObject.GetComponent<PlayableCharacterModel>().speed = characters[currentCharacterIndex].speed;
+        gameObject.GetComponent<PlayableCharacterModel>().Movement();
     }
 
     public void UseSpecialAbility()
     {
         characters[currentCharacterIndex].SpecialAbility();
     }
+
+    //sarin addeed
+    private void CencelBoxColiderForMovementToNotBeDisturbed() // and make sure they are moving together and not move around
+    {
+        for(int i =0; i < characters.Length; i++)
+        {
+            if(currentCharacterIndex != i)
+            {
+                characters[i].gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                characters[i].gameObject.transform.position = characters[currentCharacterIndex].gameObject.transform.position;
+            }
+            else if (currentCharacterIndex == i)
+            {
+                characters[i].gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
+            characters[currentCharacterIndex].GetComponentInParent<Transform>().position = characters[currentCharacterIndex].gameObject.transform.position;
+        }
+    }
+
 }
 
