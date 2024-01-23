@@ -18,9 +18,8 @@ public class RegularAlice : PlayableCharacterModel
 
     public override void SpecialAbility()
     {
-        // Special ability is jumping between spikes
-        rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-        jumpSoundEffect.Play();
+        // Special ability is rolling on spikes!
+        Debug.Log("Regular alice is rolling right now");
     }
 
     public void Start()

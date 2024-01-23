@@ -13,6 +13,7 @@ TagManager:
   - RegularAlice
   - BigAlice
   - LittleAlice
+  - Heart
   layers:
   - Default
   - TransparentFX

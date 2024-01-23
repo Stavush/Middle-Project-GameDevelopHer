@@ -52,6 +52,7 @@ public class PlayableCharacterController : MonoBehaviour
 
     public void SwitchCharacter()
     {
+
         currentCharacterIndex = (currentCharacterIndex + 1) % characters.Length;
         SetActiveCharacter(currentCharacterIndex);
         SwitchActiveChild(currentCharacterIndex);
@@ -80,24 +81,25 @@ public class PlayableCharacterController : MonoBehaviour
         characters[currentCharacterIndex].SpecialAbility();
     }
 
-    //sarin addeed
-    /*private void CencelBoxColiderForMovementToNotBeDisturbed() // and make sure they are moving together and not move around
+    /*
+    private void CencelBoxColiderForMovementToNotBeDisturbed() // and make sure they are moving together and not move around
     {
         for (int i = 0; i < characters.Length; i++)
         {
             if (currentCharacterIndex != i)
             {
-                characters[i].gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                characters[i].gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
                 characters[i].gameObject.transform.position = characters[currentCharacterIndex].gameObject.transform.position;
             }
             else if (currentCharacterIndex == i)
             {
-                characters[i].gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                characters[i].gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
             }
             characters[i].transform.position = transform.position;
         }
 
-    }*/
+    }
+    */
 
     private void UpdateParentColliderFromActiveChild()
     {
