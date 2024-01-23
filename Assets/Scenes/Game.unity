@@ -2391,7 +2391,7 @@ GameObject:
   - component: {fileID: 1140932681}
   m_Layer: 7
   m_Name: BigAlice
-  m_TagString: Untagged
+  m_TagString: BigAlice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3111,7 +3111,7 @@ GameObject:
   - component: {fileID: 1247702875}
   m_Layer: 7
   m_Name: LittleAlice
-  m_TagString: Player
+  m_TagString: LittleAlice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14352,7 +14352,7 @@ GameObject:
   - component: {fileID: 1621188576}
   m_Layer: 7
   m_Name: RegularAlice
-  m_TagString: Player
+  m_TagString: RegularAlice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

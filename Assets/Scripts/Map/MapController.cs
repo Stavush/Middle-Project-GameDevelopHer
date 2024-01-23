@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class MazeController : MonoBehaviour
+public class MapController : MonoBehaviour
 {
     private float startTime;
     private float countdownDuration = 120.0f; // 2 minutes in seconds

@@ -10,6 +10,9 @@ TagManager:
   - EarthWarm
   - Walls
   - Rewards
+  - RegularAlice
+  - BigAlice
+  - LittleAlice
   layers:
   - Default
   - TransparentFX
